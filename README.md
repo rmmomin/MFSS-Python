@@ -1,10 +1,32 @@
-# MFSS - Mixed-Frequency State Space Modeling
+# MFSS Python Port (Work in Progress)
 
-Estimation and inference on state space models that allow for mixed-frequency time series data.
+This repository is actively being ported from the original MATLAB toolbox to
+Python.  The upstream MATLAB sources remain available under `src/` while the
+new Python modules live in `python/mfss`.
+
+## Porting Status
+- The foundational abstractions (`AbstractSystem`, `AbstractStateSpace`) have been translated to Python along with a first-pass `Accumulator` scaffold.
+- A Kalman filter and Rauch–Tung–Striebel smoother with diagonal measurement noise (including time-varying systems and diffuse initialisation) are implemented via the new `StateSpace` class.
+- Core validation logic for system dimensions and sample consistency is working in Python and mirrors the MATLAB semantics.
+- A Python package skeleton has been created, enabling downstream code to `import mfss` as the port expands.
+- The MATLAB toolbox, documentation, and tests are still present for reference during the migration.
+
+### Next Steps
+- Finish porting accumulator augmentation and the remaining state space utilities (contribution decompositions, diagnostics).
+- Translate estimation tooling (`StateSpaceEstimation`, `ThetaMap`, `MFVAR`) and their optimisation helpers.
+- Recreate the MATLAB test suite in Python (likely with `pytest`) to lock in behavioural parity.
+- Add packaging metadata (e.g., `pyproject.toml`) and CI to distribute the Python port once the core features are ready.
+
+---
+
+# Legacy MATLAB Toolbox
+
+The sections below document the original MATLAB implementation and remain for
+reference during the Python migration.
 
 For an introduction to mixed-frequency state space modeling see "[A Practitioner's Guide and Matlab Toolbox for Mixed Frequency State Space Models](https://doi.org/10.18637/jss.v104.i10)" by Scott Brave, Andrew Butters, and David Kelley.
 
-## Installation
+## MATLAB Installation
 
 The easiest way to use MFSS is to install it via the toolbox (MFSS.mltbx) by dragging it into the Matlab command window. It should install as an Add-On and be available on your path whenever using Matlab. 
 
@@ -19,13 +41,13 @@ Further functionality is available through the use of additional toolboxes:
 
 Some examples and tests additionally use the Econometrics Toolbox. 
 
-## Compatibility
+## MATLAB Compatibility
 
 MFSS has been tested on Matlab 2017b-2018b. 
 
 It is incompatible with Octave (through at least 4.4.1). 
 
-## Getting Started 
+## Getting Started (MATLAB)
 
 State space models take the form 
 
@@ -96,7 +118,7 @@ Since vector autoregressions tend to have many more parameters than other models
     ssEstimated = varMdl.estimate();
 
 
-## Building the mex files
+## Building the MATLAB mex files
 
 Substantial performance improvements are possible through using compiled versions of the Kalman filter/smoother functions. 
 
@@ -104,7 +126,7 @@ To build, a mex C/C++ compiler is required. The required library (Armadillo) is 
 
 Before running make.m, set up the mex compiler by following the instructions [here](https://www.mathworks.com/help/matlab/matlab_external/choose-c-or-c-compilers.html). 
 
-## Building the Toolbox
+## Building the MATLAB Toolbox
 
 To build the toolbox (MFSS.mltbx), run `build/make_toolbox.m`. This process is
 sensitive to the paths available when running this file since they will be

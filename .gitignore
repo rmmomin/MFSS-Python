@@ -19,3 +19,7 @@ temp/
 
 # Don't save the built documentation
 docs/build
+
+# Python build artifacts
+__pycache__/
+*.pyc
