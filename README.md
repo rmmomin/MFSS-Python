@@ -6,7 +6,7 @@ new Python modules live in `python/mfss`.
 
 ## Porting Status
 - The foundational abstractions (`AbstractSystem`, `AbstractStateSpace`) have been translated to Python along with a first-pass `Accumulator` scaffold.
-- A Kalman filter and Rauch–Tung–Striebel smoother with diagonal measurement noise (including time-varying systems and diffuse initialisation) are implemented via the new `StateSpace` class.
+- A Kalman filter and Rauch–Tung–Striebel smoother with diagonal measurement noise (including time-varying systems and diffuse initialisation) are implemented via the new `StateSpace` class, along with contribution decompositions for filtered and smoothed states.
 - Core validation logic for system dimensions and sample consistency is working in Python and mirrors the MATLAB semantics.
 - A Python package skeleton has been created, enabling downstream code to `import mfss` as the port expands.
 - The MATLAB toolbox, documentation, and tests are still present for reference during the migration.
