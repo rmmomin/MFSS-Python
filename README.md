@@ -5,17 +5,17 @@ Python.  The upstream MATLAB sources remain available under `src/` while the
 new Python modules live in `python/mfss`.
 
 ## Porting Status
-- The foundational abstractions (`AbstractSystem`, `AbstractStateSpace`) have been translated to Python along with a first-pass `Accumulator` scaffold.
-- A Kalman filter and Rauch–Tung–Striebel smoother with diagonal measurement noise (including time-varying systems and diffuse initialisation) are implemented via the new `StateSpace` class, along with contribution decompositions for filtered and smoothed states.
-- Core validation logic for system dimensions and sample consistency is working in Python and mirrors the MATLAB semantics.
-- A Python package skeleton has been created, enabling downstream code to `import mfss` as the port expands.
-- The MATLAB toolbox, documentation, and tests are still present for reference during the migration.
+- Core foundations (`AbstractSystem`, `AbstractStateSpace`, `Accumulator`) now run without dataclass import issues and mirror the MATLAB semantics for dimension bookkeeping.
+- The time-invariant **and** time-varying Kalman filter is available in Python with diffuse initialisation, together with contribution decompositions and smoothed-state diagnostics from the Rauch–Tung–Striebel smoother.
+- Initial decomposition helpers match the MATLAB toolbox output, giving per-state contributions from data, parameters, measurement exogenous variables, and state exogenous variables for both filtered and smoothed estimates.
+- A Python package skeleton is in place (pending final packaging metadata) so downstream work can import `mfss` modules while the port is completed.
+- MATLAB sources, documentation, and examples remain in `src/` for cross-reference during the migration.
 
 ### Next Steps
-- Finish porting accumulator augmentation and the remaining state space utilities (contribution decompositions, diagnostics).
-- Translate estimation tooling (`StateSpaceEstimation`, `ThetaMap`, `MFVAR`) and their optimisation helpers.
-- Recreate the MATLAB test suite in Python (likely with `pytest`) to lock in behavioural parity.
-- Add packaging metadata (e.g., `pyproject.toml`) and CI to distribute the Python port once the core features are ready.
+- Finish porting accumulator augmentation and any remaining state-space utilities (e.g., simulation smoother, error-variance helpers) to reach feature parity.
+- Translate estimation tooling (`StateSpaceEstimation`, `ThetaMap`, `MFVAR`) and their optimisation routines into Python.
+- Recreate the MATLAB test suite in Python (likely with `pytest`) and add regression tests covering the new filter, smoother, and decomposition code paths.
+- Add packaging metadata (e.g., `pyproject.toml`) and wire up CI so the Python port can be installed, linted, and tested automatically once core features land.
 
 ---
 
