@@ -17,7 +17,6 @@ import numpy as np
 from .abstract_system import AbstractSystem
 
 
-@dataclass
 class Accumulator(AbstractSystem):
     """
     State space accumulator definition.

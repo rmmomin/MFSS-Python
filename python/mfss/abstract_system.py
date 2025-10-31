@@ -16,7 +16,6 @@ from typing import Optional
 import numpy as np
 
 
-@dataclass
 class AbstractSystem:
     """
     Base class for systems containing measurements and states.
@@ -40,8 +39,8 @@ class AbstractSystem:
     stationary_states: Optional[np.ndarray] = None
 
     # Static class level flags mimicking MATLAB persistent variables
-    _use_mex: Optional[bool] = field(default=None, init=False, repr=False)
-    _use_parallel: Optional[bool] = field(default=None, init=False, repr=False)
+    _use_mex: Optional[bool] = None
+    _use_parallel: Optional[bool] = None
 
     @property
     def use_mex(self) -> bool:

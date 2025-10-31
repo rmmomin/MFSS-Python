@@ -29,7 +29,6 @@ def _as_column(vector: np.ndarray) -> np.ndarray:
     return vector
 
 
-@dataclass
 class AbstractStateSpace(AbstractSystem):
     """
     Abstract representation of a state space model.
